@@ -12,7 +12,8 @@ class CursoController extends Controller
      */
     public function index()
     {
-        //
+        $cursos = Curso::all();
+        return view('curso-index', compact('cursos'));
     }
 
     /**
@@ -20,7 +21,7 @@ class CursoController extends Controller
      */
     public function create()
     {
-        //
+        return view('curso-create');
     }
 
     /**
@@ -28,7 +29,17 @@ class CursoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request -> validate([
+            'nombre' => ['required'],
+            'informacion' => ['required', 'min:20']
+        ]);
+
+        $curso = new Curso();
+        $curso->nombre = $request->nombre;
+        $curso->informacion = $request->informacion;
+        $curso->save();
+
+        return redirect()->action([CursoController::class, 'index']);
     }
 
     /**
