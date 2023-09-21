@@ -8,8 +8,8 @@
 </head>
 <body>
     <ul class="nav nav-tabs">
-        <li class="nav-item"><a class="nav-link active" href="/curso">Cursos</a></li>
-        <li class="nav-item"><a class="nav-link" href="curso/create">Crear curso</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{{ route('curso.index') }}">Cursos</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('curso.create') }}">Crear curso</a></li>
     </ul>
     <h1 class="text-center">Lista de Cursos</h1>
     <div class="row">
@@ -26,7 +26,7 @@
                         @foreach ($cursos->all() as $curso)
                             <tr>
                                 <td>{{ $curso->id }}</td>
-                                <td>{{ $curso->nombre }}</td>
+                                <td><a href="{{ route('curso.show', $curso->id) }}">{{ $curso->nombre }}</a></td>
                             </tr>
                         @endforeach
                     </tbody>

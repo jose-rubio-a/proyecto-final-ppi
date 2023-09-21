@@ -8,8 +8,8 @@
 </head>
 <body>
     <ul class="nav nav-tabs">
-        <li class="nav-item"><a class="nav-link" href="/curso">Cursos</a></li>
-        <li class="nav-item"><a class="nav-link active" href="curso/create">Crear curso</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('curso.index') }}">Cursos</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{{ route('curso.create') }}">Crear curso</a></li>
     </ul>
     <h1 style="text-align: center;">Crear un curso</h1>
     <section class="position-relative py-4 py-xl-5">
@@ -18,7 +18,7 @@
                 <div class="col-md-6 col-xl-4">
                     <div class="card mb-5">
                         <div class="card-body d-flex flex-column align-items-center">
-                            <form class="text-center" method="post" action="/curso">
+                            <form class="text-center" method="post" action="{{ route('curso.store') }}">
                                 @csrf
                                 <div class="mb-3"><input class="form-control" type="text" name="nombre" placeholder="Nombre"></div>
                                 @error('nombre')

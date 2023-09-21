@@ -13,6 +13,7 @@ class CursoController extends Controller
     public function index()
     {
         $cursos = Curso::all();
+        #Curso::where('nombre', 'like', 'Prueba')->get('col1');
         return view('curso-index', compact('cursos'));
     }
 
@@ -39,7 +40,7 @@ class CursoController extends Controller
         $curso->informacion = $request->informacion;
         $curso->save();
 
-        return redirect()->action([CursoController::class, 'index']);
+        return redirect('/curso');
     }
 
     /**
@@ -47,7 +48,7 @@ class CursoController extends Controller
      */
     public function show(Curso $curso)
     {
-        //
+        return view('curso-show', compact('curso'));
     }
 
     /**
@@ -55,7 +56,7 @@ class CursoController extends Controller
      */
     public function edit(Curso $curso)
     {
-        //
+        return view('curso-edit', compact('curso'));
     }
 
     /**
@@ -63,7 +64,16 @@ class CursoController extends Controller
      */
     public function update(Request $request, Curso $curso)
     {
-        //
+        $request -> validate([
+            'nombre' => ['required'],
+            'informacion' => ['required', 'min:20']
+        ]);
+
+        $curso->nombre = $request->nombre;
+        $curso->informacion = $request->informacion;
+        $curso->save();
+
+        return redirect('/curso');
     }
 
     /**
@@ -71,6 +81,8 @@ class CursoController extends Controller
      */
     public function destroy(Curso $curso)
     {
-        //
+        $curso->delete();
+        
+        return redirect('/curso');
     }
 }
