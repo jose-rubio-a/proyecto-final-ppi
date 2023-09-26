@@ -20,7 +20,7 @@
                             <div class="card-body d-flex flex-column align-items-center">
                                 <form class="text-center" method="post" action="{{ route('curso.update', $curso) }}">
                                     @csrf
-                                    <input type="hidden" name="_method" value="PUT">
+                                    @method('PUT')
                                     <div class="mb-3"><input class="form-control" type="text" name="nombre" placeholder="Nombre" value="{{ $curso->nombre }}"></div>
                                     @error('nombre')
                                         <div class="alert alert-danger">{{ $message }}</div>
