@@ -73,7 +73,7 @@ class CursoController extends Controller
         $curso->informacion = $request->informacion;
         $curso->save();
 
-        return redirect('/curso');
+        return redirect()->route('curso.index');
     }
 
     /**
