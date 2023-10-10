@@ -18,10 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/prueba', function () {
-    return view('prueba');
-});
-
 Route::resource('publicacion', PublicacionController::class);
 
 Route::middleware([
