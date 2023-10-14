@@ -7,18 +7,13 @@ use Illuminate\Http\Request;
 
 class PublicacionController extends Controller
 {
-
-    public function showCategoria($categoria){
-        $publicaciones = Publicacion::where('categoria', $categoria)->get();
-        return view('publicacion-index', compact('publicaciones'));
-    }
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
         $publicaciones = Publicacion::where('nombre', 'LIKE', "%{$request->buscador}%")->get();
-        return view('publicacion-index', compact('publicaciones'));
+        return view('publicaciones.publicacion-index', compact('publicaciones'));
     }
 
     /**
@@ -26,7 +21,7 @@ class PublicacionController extends Controller
      */
     public function create()
     {
-        return view('publicacion-create');
+        return view('publicaciones.publicacion-create');
     }
 
     /**
@@ -64,7 +59,7 @@ class PublicacionController extends Controller
      */
     public function show(Publicacion $publicacion)
     {
-        return view('publicacion-show', compact('publicacion'));
+        return view('publicaciones.publicacion-show', compact('publicacion'));
     }
 
     /**
@@ -72,7 +67,7 @@ class PublicacionController extends Controller
      */
     public function edit(Publicacion $publicacion)
     {
-        return view('publicacion-edit', compact('publicacion'));
+        return view('publicaciones.publicacion-edit', compact('publicacion'));
     }
 
     /**
@@ -97,6 +92,7 @@ class PublicacionController extends Controller
         $publicacion->nombre = $request->nombre;
         $publicacion->descripcion = $request->descripcion;
         $publicacion->precio = $request->precio;
+        $publicacion->categoria = $request->categoria;
         $publicacion->save();
 
         return redirect()->route('publicacion.index');
