@@ -7,12 +7,17 @@ use Illuminate\Http\Request;
 
 class PublicacionController extends Controller
 {
+
+    public function showCategoria($categoria){
+        $publicaciones = Publicacion::where('categoria', $categoria)->get();
+        return view('publicacion-index', compact('publicaciones'));
+    }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $publicaciones = Publicacion::all();
+        $publicaciones = Publicacion::where('nombre', 'LIKE', "%{$request->buscador}%")->get();
         return view('publicacion-index', compact('publicaciones'));
     }
 
@@ -32,13 +37,23 @@ class PublicacionController extends Controller
         $request -> validate([
             'nombre' => ['required'],
             'descripcion' => ['required'],
-            'precio' => ['decimal:2']
+            'precio' => ['decimal:0,2'],
+            'imagen' => ['image', 'mimes:jpeg,png,svg']
         ]);
 
         $publicacion = new Publicacion();
         $publicacion->nombre = $request->nombre;
         $publicacion->descripcion = $request->descripcion;
         $publicacion->precio = $request->precio;
+        $publicacion->categoria = $request->categoria;
+
+        if($imagen = $request->file('imagen')){
+            $rutaImg = 'imagen/';
+            $fileName = date('YmdHis').".".$imagen->getClientOriginalExtension();
+            $imagen->move($rutaImg, $fileName);
+            $publicacion['imagen'] = "$fileName";
+        }
+
         $publicacion->save();
 
         return redirect()->route('publicacion.index');
@@ -68,8 +83,16 @@ class PublicacionController extends Controller
         $request -> validate([
             'nombre' => ['required'],
             'descripcion' => ['required'],
-            'precio' => ['decimal:2']
+            'precio' => ['decimal:0,2'],
+            'imagen' => ['image', 'mimes:jpeg,png,svg']
         ]);
+
+        if($imagen = $request->file('imagen')){
+            $rutaImg = 'imagen/';
+            $fileName = date('YmdHis').".".$imagen->getClientOriginalExtension();
+            $imagen->move($rutaImg, $fileName);
+            $publicacion['imagen'] = "$fileName";
+        }
 
         $publicacion->nombre = $request->nombre;
         $publicacion->descripcion = $request->descripcion;

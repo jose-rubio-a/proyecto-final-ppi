@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect()->route('publicacion.index');;
+    return redirect()->route('publicacion.index');
 });
 
 Route::resource('publicacion', PublicacionController::class);
