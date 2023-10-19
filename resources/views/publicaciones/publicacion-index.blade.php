@@ -1,10 +1,10 @@
 <x-base>
-    <div class="d-lg-flex justify-content-lg-start" style="margin-top: 20px;margin-left: 82px;">
+    <div class="d-lg-flex justify-content-lg-start" style="margin-top: 20px;margin-left: 20%;">
         <form class="d-lg-flex justify-content-lg-end" style="width: 90%;" action="{{ route('publicacion.index')}}" method="post">
             @csrf
             @method('GET')
-            <input class="form-control" type="text" name="buscador" placeholder="Buscar Producto..." style="width: 80%;border-radius: 50px;border-color: rgb(111,115,123);">
-            <button class="btn btn-primary border rounded-pill" type="submit" style="margin-left: 5px;width: 150px;border-radius: 40px;">Buscar</button>
+            <input class="form-control" type="text" name="buscador" placeholder="Buscar Producto..." style="width: 70%;border-radius: 50px;border-color: rgb(111,115,123);">
+            <button class="btn btn-primary border rounded-pill" type="submit" style="margin-left: 2px;border-radius: 40px; width: 20%;">Buscar</button>
         </form>
     </div>
     <div style="margin-left: 100px;margin-top: 0px;">

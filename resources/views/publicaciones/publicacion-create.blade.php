@@ -1,5 +1,5 @@
 <x-base>
-    <div style="margin-left: 72px;">
+    <div style="margin-left:72px;">
         <div style="width: 100%;">
             <div class="container d-lg-flex justify-content-lg-center align-items-lg-center" style="height: 150px;width: 100%;margin-top: 0px;background: var(--bs-body-color);margin-left: 0px;padding: 0px;">
                 <h1 style="color: var(--bs-body-bg);font-size: 60px;">Crear publicación</h1>

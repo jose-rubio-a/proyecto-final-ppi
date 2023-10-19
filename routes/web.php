@@ -18,7 +18,8 @@ Route::get('/', function () {
     return redirect()->route('publicacion.index');
 });
 
-Route::resource('publicacion', PublicacionController::class);
+//Route::middleware('auth')->group(function(){ } ) para aplicar el auth a un grupo de rutas 
+Route::resource('publicacion', PublicacionController::class); //->middleware('auth') para que todas las rutas del resource obliguen a registrarte
 
 Route::middleware([
     'auth:sanctum',

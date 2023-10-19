@@ -50,9 +50,9 @@
                     @auth
                         <a href="{{ url('/dashboard') }}" class="dropdown-item">Dashboard</a>
                         <div class="dropdown-divider"></div>
-                        <form action="{{ route('logout') }}" method="post">
+                        <form action="{{ route('logout') }}" method="post" x-data="">
                             @csrf
-                            <button class="dropdown-item" type="submit">Sign out</button>
+                            <button class="dropdown-item" type="submit">Log out</button> <!-- En caso de dejar tipo a podemos agregar @click.prevent para evitar que funcione como get-->
                         </form>
                     @else
                         <a href="{{ route('login') }}" class="dropdown-item">Log in</a>
@@ -66,6 +66,7 @@
         </div>
         {{ $slot }}
         <script src="{{ asset('pagina/bootstrap/js/bootstrap.min.js')}}"></script>
+        @livewireScripts
     </body>
 
 </html>

@@ -10,6 +10,13 @@ class PublicacionController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index', 'show'); //Sin only o except se aplica a todos los metodos
+                                //->only();
+    }
+
     public function index(Request $request)
     {
         $publicaciones = Publicacion::where('nombre', 'LIKE', "%{$request->buscador}%")->get();
