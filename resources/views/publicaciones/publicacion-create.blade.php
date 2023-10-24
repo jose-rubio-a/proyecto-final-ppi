@@ -1,11 +1,11 @@
 <x-base>
-    <div style="margin-left:72px;">
+    <div style="margin-left: 0px;">
         <div style="width: 100%;">
             <div class="container d-lg-flex justify-content-lg-center align-items-lg-center" style="height: 150px;width: 100%;margin-top: 0px;background: var(--bs-body-color);margin-left: 0px;padding: 0px;">
-                <h1 style="color: var(--bs-body-bg);font-size: 60px;">Crear publicación</h1>
+                <h1 style="color: var(--bs-body-bg);font-size: 40px;">Crear publicación</h1>
             </div>
         </div>
-        <div class="d-lg-flex justify-content-lg-center">
+        <div class="d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-lg-center">
             <div class="card d-lg-flex justify-content-lg-center" style="width: 80%;background: rgb(255,255,253);">
                 <div class="card-body">
                     <form method="post" action="{{ route('publicacion.store') }}" enctype="multipart/form-data">

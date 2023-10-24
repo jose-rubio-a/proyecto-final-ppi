@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Publicacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PublicacionController extends Controller
 {
@@ -43,11 +44,15 @@ class PublicacionController extends Controller
             'imagen' => ['image', 'mimes:jpeg,png,svg']
         ]);
 
+        //$request->merge(['user_id' => Auth::id])
+        // Publicacion::create($request->all());
+
         $publicacion = new Publicacion();
         $publicacion->nombre = $request->nombre;
         $publicacion->descripcion = $request->descripcion;
         $publicacion->precio = $request->precio;
         $publicacion->categoria = $request->categoria;
+        $publicacion->user_id = Auth::id();
 
         if($imagen = $request->file('imagen')){
             $rutaImg = 'imagen/';
