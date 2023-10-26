@@ -9,7 +9,7 @@ class Categoria extends Model
 {
     use HasFactory;
     // protected $table = 'organizaciones';
-    // public $timestamp = false;
+    public $timestamps = false;
 
     public function publicaciones(){
         return $this->belongsToMany(Publicacion::class);

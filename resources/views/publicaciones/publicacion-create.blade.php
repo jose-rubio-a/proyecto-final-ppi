@@ -30,12 +30,11 @@
                             </div>
                             <div class="col">
                                 <label class="form-label" for="categoria" style="font-size: 24px;">Categoria</label>
-                                <select class="form-select" name="categoria">
+                                <select class="form-select" name="categoria_id[]" multiple>
                                     <optgroup label="Categoria">
-                                        <option value="comida" {{ old("categoria") == "comida" ? "selected" : "" }}>Comida</option>
-                                        <option value="ropa" {{ old("categoria") == "ropa" ? "selected" : "" }}>Ropa</option>
-                                        <option value="electronicos" {{ old("categoria") == "electronicos" ? "selected" : "" }}>Electronicos</option>
-                                        <option value="otro" {{ old("categoria") == "" ? "selected" : "" }}>Otro</option>
+                                        @foreach($categorias as $categoria)
+                                            <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
+                                        @endforeach           
                                     </optgroup>
                                 </select>
                             </div>
