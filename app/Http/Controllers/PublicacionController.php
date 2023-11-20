@@ -45,11 +45,20 @@ class PublicacionController extends Controller
             'precio' => ['decimal:0,2'],
             'imagen' => ['image', 'mimes:jpeg,png,svg']
         ]);
+        
+        $request->merge(['user_id' => Auth::id()]);
 
-        //$request->merge(['user_id' => Auth::id])
-        //$publicacion =  Publicacion::create($request->all());
+        if($request->file('imagen')){
+            if($request->file('imagen')->isValid()){
+                $request->merge(['archivo_nombre' => $request->file('imagen')->getClientOriginalName(),
+                'archivo_ubicacion' => $request->file('imagen')->store('public/img')
+                            ]);
+            }
+        }
+            
+        $publicacion =  Publicacion::create($request->all());
 
-        $publicacion = new Publicacion();
+        /*$publicacion = new Publicacion();
         $publicacion->nombre = $request->nombre;
         $publicacion->descripcion = $request->descripcion;
         $publicacion->precio = $request->precio;
@@ -60,9 +69,9 @@ class PublicacionController extends Controller
             $fileName = date('YmdHis').".".$imagen->getClientOriginalExtension();
             $imagen->move($rutaImg, $fileName);
             $publicacion['imagen'] = "$fileName";
-        }
+        }*/
 
-        $publicacion->save();
+        //$publicacion->save();
 
         $publicacion->categorias()->attach($request->categorias_id);
 
@@ -96,18 +105,26 @@ class PublicacionController extends Controller
             'precio' => ['decimal:0,2'],
             'imagen' => ['image', 'mimes:jpeg,png,svg']
         ]);
-
-        if($imagen = $request->file('imagen')){
+        
+        /* if($imagen = $request->file('imagen')){
             $rutaImg = 'imagen/';
             $fileName = date('YmdHis').".".$imagen->getClientOriginalExtension();
             $imagen->move($rutaImg, $fileName);
             $publicacion['imagen'] = "$fileName";
-        }
-
+        }*/
+        
         $publicacion->nombre = $request->nombre;
         $publicacion->descripcion = $request->descripcion;
         $publicacion->precio = $request->precio;
-        $publicacion->categoria = $request->categoria;
+        if($request->file('imagen')){
+            if($request->file('imagen')->isValid()){
+                $request->merge(['archivo_nombre' => $request->file('imagen')->getClientOriginalName(),
+                'archivo_ubicacion' => $request->file('imagen')->store('public/img')
+                            ]);
+            }
+            $publicacion->archivo_ubicacion = $request->archivo_ubicacion;
+            $publicacion->archivo_nombre = $request->archivo_nombre;
+        }
         $publicacion->save();
 
         return redirect()->route('publicacion.index');

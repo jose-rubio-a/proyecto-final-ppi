@@ -3,9 +3,9 @@
     <div class="card h-100">
         <!-- Product image-->
         @if ($imagen != "")
-            <img class="card-img-top" src="imagen/{{$imagen}}" alt="Producto: {{$nombre}}" style="max-height: 200px;"/>
+            <img class="card-img-top" src="{{ Storage::url($imagen)}}" alt="Producto: {{$nombre}}" style="max-height: 200px;"/>
         @else
-            <img class="card-img-top" src="imagen/default.png" alt="Producto: {{ $nombre }}" style="max-height: 200px;"/>
+            <img class="card-img-top" src="storage/img/default.png" alt="Producto: {{ $nombre }}" style="max-height: 200px;"/>
         @endif
         <!-- Product details-->
         <div class="card-body p-4">

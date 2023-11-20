@@ -22,7 +22,7 @@
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     @foreach ($publicaciones->all() as $publicacion)
                     <x-product>
-                        <x-slot:imagen>{{ $publicacion->imagen }}</x-slot:imagen>
+                        <x-slot:imagen>{{ $publicacion->archivo_ubicacion }}</x-slot:imagen>
                         <x-slot:id>{{ $publicacion->id}}</x-slot:id>
                         <x-slot:nombre>{{ $publicacion->nombre }}</x-slot:nombre>
                         <x-slot:precio>${{ $publicacion->precio }}</x-slot:precio>

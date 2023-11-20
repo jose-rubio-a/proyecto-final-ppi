@@ -1,8 +1,8 @@
 <x-base>
 <div>
         <div class="d-lg-flex justify-content-lg-center">
-            @if ($publicacion->imagen != "")
-            <img class="d-lg-flex justify-content-lg-center" style="height: 250px;" src="/imagen/{{ $publicacion->imagen }}" alt="{{ $publicacion->nombre }}">
+            @if ($publicacion->archivo_ubicacion != NULL)
+            <img class="d-lg-flex justify-content-lg-center" style="height: 250px;" src="{{ Storage::url($publicacion->archivo_ubicacion) }}" alt="{{ $publicacion->nombre }}">
             @else
             <img class="d-lg-flex justify-content-lg-center" style="height: 250px;" src="/imagen/default.png" alt="{{ $publicacion->nombre }}">
             @endif    

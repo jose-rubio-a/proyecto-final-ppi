@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->text('descripcion');
-            $table->string('imagen')->nullable();
             $table->float('precio');
+            $table->string('archivo_ubicacion')->nullable();
+            $table->string('archivo_nombre')->nullable();
             $table->timestamps();
         });
     }
