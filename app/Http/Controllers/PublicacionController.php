@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use App\Models\Comentario;
 use App\Models\Publicacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -83,7 +84,8 @@ class PublicacionController extends Controller
      */
     public function show(Publicacion $publicacion)
     {
-        return view('publicaciones.publicacion-show', compact('publicacion'));
+        $comentarios = Comentario::where('publicacion_id', "{$publicacion->id}")->get();
+        return view('publicaciones.publicacion-show', compact('publicacion', 'comentarios'));
     }
 
     /**

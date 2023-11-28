@@ -17,4 +17,8 @@ class Publicacion extends Model
     public function categorias(){
         return $this->belongsToMany(Categoria::class);
     }
+
+    public function comentarios(){
+        return $this->hasMany(Comentario::class);
+    }
 }

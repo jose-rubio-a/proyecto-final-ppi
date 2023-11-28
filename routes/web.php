@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\PublicacionController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,8 @@ Route::get('/', function () {
 
 //Route::middleware('auth')->group(function(){ } ) para aplicar el auth a un grupo de rutas 
 Route::resource('publicacion', PublicacionController::class); //->middleware('auth') para que todas las rutas del resource obliguen a registrarte
+
+Route::resource('comentario', ComentarioController::class);
 
 Route::middleware([
     'auth:sanctum',
