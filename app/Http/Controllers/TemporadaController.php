@@ -27,6 +27,7 @@ class TemporadaController extends Controller
      */
     public function create()
     {
+        $this->authorize('admin');
         return view('temporadas.temporada-create');
     }
 
@@ -35,6 +36,7 @@ class TemporadaController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request -> validate([
             'nombre' => ['required'],
             'imagen' => ['image', 'mimes:jpeg,png,svg']
@@ -66,6 +68,7 @@ class TemporadaController extends Controller
      */
     public function edit(Temporada $temporada)
     {
+        $this->authorize('admin');
         return view('temporadas.temporada-edit', compact('temporada'));
     }
 
@@ -100,6 +103,7 @@ class TemporadaController extends Controller
      */
     public function destroy(Temporada $temporada)
     {
+        $this->authorize('admin');
         $temporada->delete();
 
         return redirect()->route('temporada.index');

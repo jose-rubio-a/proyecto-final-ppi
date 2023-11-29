@@ -1,15 +1,20 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <x-welcome />
+<x-base>
+    <div class="row">
+        <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+            @if(auth()->user()->profile_photo_path)
+                <img class="d-lg-flex justify-content-lg-center align-items-lg-center" style="width: 100%;height: 100%;">
+            @else
+            <img class="d-lg-flex justify-content-lg-center align-items-lg-center" style="width: 100%;height: 100%;" src="{{asset('storage/img/user.png')}}">
+            @endif
+        </div>
+        <div class="col">
+            <h1>Nombre:</h1>
+            <h4>{{ auth()->user()->name }}</h4>
+            <h1>Correo:</h1>
+            <h4>{{ auth()->user()->email }}</h4>
+            <div class="col d-flex justify-content-center align-items-center">
+                <a class="btn btn-primary" href="{{ route('makeAdmin', auth()->user())}}" style="width: 50%;border-width: 0; margin-top: 20px;">Hacer Administrador</a>
             </div>
         </div>
     </div>
-</x-app-layout>
+</x-base>

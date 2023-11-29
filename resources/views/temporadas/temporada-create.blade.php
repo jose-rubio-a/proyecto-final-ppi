@@ -12,7 +12,7 @@
                     <form method="post" action="{{ route('temporada.store') }}" enctype="multipart/form-data">
                         @csrf
                         <label class="form-label" for="nombre" style="font-size: 24px;" >Nombre</label>
-                        <input class="form-control d-flex" type="text" style="width: 75%;" name="nombre" placeholder="Nombre" value="{{ old('nombre') }}">
+                        <input class="form-control d-flex" type="text" style="width: 75%;" name="nombre" placeholder="Nombre" value="{{ old('nombre') }}" required>
                         @error('nombre')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror

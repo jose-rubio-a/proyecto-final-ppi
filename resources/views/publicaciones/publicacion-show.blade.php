@@ -13,6 +13,13 @@
             <h1>{{ $publicacion->nombre }}</h1>
             <h4>$ {{ $publicacion->precio }}</h4>
             <p>{{ $publicacion->descripcion }}</p>
+            <div class="row">
+                <div class="col">
+                    @foreach($publicacion->temporadas as $temporada)
+                        <a href="{{ route('temporada.show', $temporada->id ) }}">{{ $temporada->nombre }}</a>
+                    @endforeach
+                </div>
+            </div>
             <div class="row" style="width: 80%;">
                 <div class="col">
                     <h6 style="margin-left: 25px;">Creado: {{ $publicacion->created_at }} por {{ $publicacion->user->name }}</h6>
@@ -22,19 +29,21 @@
                 </div>
             </div>
             <button class="btn btn-primary" type="button" style="width: 100%;background: var(--bs-emphasis-color);border-width: 0; margin-top: 20px;">Agregar al carrito</button>
-            @if (strval(Auth::id()) == $publicacion->user_id)
-            <div class="row" style="margin-top: 30px; width: 100%;" class="d-flex d-lg-flex justify-content-center justify-content-lg-center align-items-lg-center">
-                <div class="col">
-                    <a class="btn btn-primary" href="{{ route('publicacion.edit', $publicacion->id ) }}" style="width: 100%;background: var(--bs-btn-border-color);border-width: 0;">Editar</a>
+            @auth
+                @if (strval(Auth::id()) == $publicacion->user_id or auth()->user()->admin)
+                <div class="row" style="margin-top: 30px; width: 100%;" class="d-flex d-lg-flex justify-content-center justify-content-lg-center align-items-lg-center">
+                    <div class="col">
+                        <a class="btn btn-primary" href="{{ route('publicacion.edit', $publicacion->id ) }}" style="width: 100%;background: var(--bs-btn-border-color);border-width: 0;">Editar</a>
+                    </div>
+                    <div class="col">
+                        <form method="post" action="{{ route('publicacion.destroy', $publicacion->id ) }}">
+                            @csrf    
+                            @method('DELETE')
+                            <button class="btn btn-primary" type="submit" style="width: 100%;background: var(--bs-form-invalid-color);border-width: 0;">Eliminar</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="col">
-                    <form method="post" action="{{ route('publicacion.destroy', $publicacion->id ) }}">
-                        @csrf    
-                        @method('DELETE')
-                        <button class="btn btn-primary" type="submit" style="width: 100%;background: var(--bs-form-invalid-color);border-width: 0;">Eliminar</button>
-                    </form>
-                </div>
-            </div>
+                @endif
             @endif
         </div>
     </div>
@@ -47,7 +56,7 @@
                     <form style="margin-top: 20px;"  method="post" action="{{ route('comentario.store') }}">
                         @csrf
                         <input type="hidden" name="publicacion_id" value="{{ $publicacion->id }}" />
-                        <textarea class="form-control" name="texto" placeholder="Deja tu comentario"></textarea>
+                        <textarea class="form-control" name="texto" placeholder="Deja tu comentario" required></textarea>
                         @error('texto')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror

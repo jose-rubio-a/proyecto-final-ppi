@@ -4,7 +4,7 @@
             @if ($imagen != "")
                 <img class="card-img-top" src="{{ Storage::url($imagen)}}" alt="Producto: {{$nombre}}" style="max-height: 200px; border-radius: 0px;"/>
             @else
-                <img class="card-img-top" src="storage/img/default.png" alt="Producto: {{ $nombre }}" style="max-height: 200px; border-radius: 0px;"/>
+                <img class="card-img-top" src="{{asset('storage/img/default.png')}}" alt="Producto: {{ $nombre }}" style="max-height: 200px; border-radius: 0px;"/>
             @endif
                 <div class="card-body">
                     <h4 class="card-title">{{ $nombre }}</h4>

@@ -12,16 +12,20 @@
                 <div class="text-center">
                     <a class="btn btn-outline-dark mt-auto" href="{{ route('temporada.show', $id ) }}">Mostrar mas</a>
                 </div>
-                <div class="text-center" style="margin-top: 5px;">
-                    <a class="btn btn-outline-dark mt-auto" href="{{ route('temporada.edit', $id ) }}">Editar</a>
-                </div>
-                <div class="text-center" style="margin-top: 5px;">
-                    <form method="post" action="{{ route('temporada.destroy', $id ) }}">
-                        @csrf    
-                        @method('DELETE')
-                        <button class="btn btn-outline-dark mt-auto" type="submit">Eliminar</button>
-                    </form>
-                </div>
+                @auth
+                    @if(auth()->user()->admin)
+                    <div class="text-center" style="margin-top: 5px;">
+                        <a class="btn btn-outline-dark mt-auto" href="{{ route('temporada.edit', $id ) }}">Editar</a>
+                    </div>
+                    <div class="text-center" style="margin-top: 5px;">
+                        <form method="post" action="{{ route('temporada.destroy', $id ) }}">
+                            @csrf    
+                            @method('DELETE')
+                            <button class="btn btn-outline-dark mt-auto" type="submit">Eliminar</button>
+                        </form>
+                    </div>
+                    @endif
+                @endif
             </div>
         </div>
     </div>

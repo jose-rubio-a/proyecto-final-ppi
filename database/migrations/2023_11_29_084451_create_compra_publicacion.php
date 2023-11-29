@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('temporadas', function (Blueprint $table) {
-            $table->id();
-            $table->string('nombre');
-            $table->string('archivo_ubicacion')->nullable();
-            $table->string('archivo_nombre')->nullable();
-            $table->softDeletes();
-            $table->timestamps();
+        Schema::create('compra_publicacion', function (Blueprint $table) {
+            $table->foreignId('publicacion_id')->constrained();
+            $table->foreignId('compra_id')->constrained()->onDelete('cascade');
         });
     }
 
@@ -26,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('temporadas');
+        Schema::dropIfExists('compra_publicacion');
     }
 };

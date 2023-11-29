@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categoria;
-use App\Models\Categoria_ropa;
 use App\Models\Comentario;
 use App\Models\Publicacion;
 use App\Models\Temporada;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,6 +32,7 @@ class PublicacionController extends Controller
      */
     public function create()
     {
+        $this->authorize('admin');
         $temporadas = Temporada::all();
         return view('publicaciones.publicacion-create', compact('temporadas'));
     }
@@ -86,7 +86,7 @@ class PublicacionController extends Controller
      */
     public function show(Publicacion $publicacion)
     {
-        $comentarios = Comentario::where('publicacion_id', "{$publicacion->id}")->get();
+        $comentarios = Comentario::with(['publicacion', 'user'])->get();
         return view('publicaciones.publicacion-show', compact('publicacion', 'comentarios'));
     }
 
@@ -95,7 +95,9 @@ class PublicacionController extends Controller
      */
     public function edit(Publicacion $publicacion)
     {
-        return view('publicaciones.publicacion-edit', compact('publicacion', 'categorias'));
+        $this->authorize('admin');
+        $temporadas = Temporada::all();
+        return view('publicaciones.publicacion-edit', compact('publicacion', 'temporadas'));
     }
 
     /**
@@ -103,6 +105,9 @@ class PublicacionController extends Controller
      */
     public function update(Request $request, Publicacion $publicacion)
     {
+
+        
+
         $request -> validate([
             'nombre' => ['required'],
             'descripcion' => ['required'],
@@ -129,6 +134,9 @@ class PublicacionController extends Controller
             $publicacion->archivo_ubicacion = $request->archivo_ubicacion;
             $publicacion->archivo_nombre = $request->archivo_nombre;
         }
+
+        $publicacion->temporadas()->attach($request->temporadas_id);
+
         $publicacion->save();
 
         return redirect()->route('publicacion.show', $publicacion->id);
@@ -139,8 +147,18 @@ class PublicacionController extends Controller
      */
     public function destroy(Publicacion $publicacion)
     {
+        $this->authorize('admin');
         $publicacion->delete();
 
         return redirect()->route('publicacion.index');
+    }
+
+    public function makeAdmin(User $user){
+        $user->name = $user->name;
+        $user->email = $user->email;
+        $user->admin = true;
+        $user->save();
+
+        return redirect()->route('dashboard');
     }
 }

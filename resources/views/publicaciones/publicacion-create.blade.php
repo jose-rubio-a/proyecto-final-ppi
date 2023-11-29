@@ -12,26 +12,26 @@
                     <form method="post" action="{{ route('publicacion.store') }}" enctype="multipart/form-data">
                         @csrf
                         <label class="form-label" for="nombre" style="font-size: 24px;" >Nombre</label>
-                        <input class="form-control d-flex" type="text" style="width: 75%;" name="nombre" placeholder="Nombre" value="{{ old('nombre') }}">
+                        <input class="form-control d-flex" type="text" style="width: 75%;" name="nombre" placeholder="Nombre" value="{{ old('nombre') }}" required>
                         @error('nombre')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                         <label class="form-label" style="font-size: 24px;" for="descripcion">Descripción</label>
-                        <textarea class="form-control" name="descripcion" placeholder="Descripcion">{{ old('descripcion') }}</textarea>
+                        <textarea class="form-control" name="descripcion" placeholder="Descripcion" required>{{ old('descripcion') }}</textarea>
                         @error('descripcion')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                         <div class="row">
                             <div class="col">
                                 <label class="form-label" style="font-size: 24px;" for="precio">Precio</label>
-                                <input class="form-control" type="number" style="width: 100%;" name="precio" step="any" placeholder="0.00" value="{{ old('precio') }}">
+                                <input class="form-control" type="number" style="width: 100%;" name="precio" step="any" placeholder="0.00" value="{{ old('precio') }}" required>
                                 @error('precio')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="col">
                                 <label class="form-label" for="temporada" style="font-size: 24px;">temporada</label>
-                                <select class="form-select" name="temporadas_id[]" multiple>
+                                <select class="form-select" name="temporadas_id[]" multiple required>
                                     <optgroup label="temporada">
                                         @foreach($temporadas as $temporada)
                                             <option value="{{ $temporada->id }}">{{ $temporada->nombre }}</option>

@@ -11,7 +11,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens;
     use HasFactory;
@@ -61,6 +61,10 @@ class User extends Authenticatable
 
     public function publicacions(){
         return $this->hasMany(Publicacion::class);
+    }
+
+    public function compras(){
+        return $this->hasMany(Compra::class);
     }
 
     public function comentarios(){
