@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\PublicacionController;
+use App\Http\Controllers\TemporadaController;
+use App\Models\Categoria_ropa;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +26,8 @@ Route::get('/', function () {
 Route::resource('publicacion', PublicacionController::class); //->middleware('auth') para que todas las rutas del resource obliguen a registrarte
 
 Route::resource('comentario', ComentarioController::class);
+
+Route::resource('temporada', TemporadaController::class);
 
 Route::middleware([
     'auth:sanctum',

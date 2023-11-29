@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Categoria extends Model
+class Temporada extends Model
 {
     use HasFactory;
-    // protected $table = 'organizaciones';
-    public $timestamps = false;
+    protected $fillable = ['nombre', 'archivo_ubicacion', 'archivo_nombre'];
 
-    public function publicaciones(){
+    public function publicacions(){
         return $this->belongsToMany(Publicacion::class);
     }
 }

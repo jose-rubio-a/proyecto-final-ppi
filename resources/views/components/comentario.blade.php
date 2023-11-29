@@ -1,5 +1,5 @@
 @props(['id', 'texto', 'calificacion', 'created_at', 'nombre', 'user_id'])
-<div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+<div class="d-flex d-lg-flex justify-content-center justify-content-lg-center align-items-lg-center" style="margin-top: 20px;">
     <div class="card" style="width: 80%; margin-bottom: 10px;">
         <div class="card-body">
             <h4 class="card-title">{{ $nombre }}</h4>

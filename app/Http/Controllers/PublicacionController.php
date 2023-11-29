@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use App\Models\Categoria_ropa;
 use App\Models\Comentario;
 use App\Models\Publicacion;
+use App\Models\Temporada;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,8 +33,8 @@ class PublicacionController extends Controller
      */
     public function create()
     {
-        $categorias = Categoria::all();
-        return view('publicaciones.publicacion-create', compact('categorias'));
+        $temporadas = Temporada::all();
+        return view('publicaciones.publicacion-create', compact('temporadas'));
     }
 
     /**
@@ -74,7 +76,7 @@ class PublicacionController extends Controller
 
         //$publicacion->save();
 
-        $publicacion->categorias()->attach($request->categorias_id);
+        $publicacion->temporadas()->attach($request->temporadas_id);
 
         return redirect()->route('publicacion.index');
     }
@@ -93,7 +95,7 @@ class PublicacionController extends Controller
      */
     public function edit(Publicacion $publicacion)
     {
-        return view('publicaciones.publicacion-edit', compact('publicacion'));
+        return view('publicaciones.publicacion-edit', compact('publicacion', 'categorias'));
     }
 
     /**
@@ -129,7 +131,7 @@ class PublicacionController extends Controller
         }
         $publicacion->save();
 
-        return redirect()->route('publicacion.index');
+        return redirect()->route('publicacion.show', $publicacion->id);
     }
 
     /**

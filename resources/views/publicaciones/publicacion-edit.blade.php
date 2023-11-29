@@ -1,10 +1,11 @@
 <x-base>
-    <div style="margin-left: 0px;">
-        <div style="width: 100%;">
-            <div class="container d-lg-flex justify-content-lg-center align-items-lg-center" style="height: 150px;width: 100%;margin-top: 0px;background: var(--bs-body-color);margin-left: 0px;padding: 0px;">
-                <h1 style="color: var(--bs-body-bg);font-size: 40px;">Editar: {{ $publicacion->nombre }}</h1>
-            </div>
+<div class="col-md-12 d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center" style="width: 100%;padding-right: 0px;padding-left: 0px;">
+        <div class="col-md-12 d-flex d-lg-flex justify-content-center justify-content-lg-center align-items-lg-center" style="width: 100%;padding-right: 0px;padding-left: 0px;">
+            <img class="d-inline-block" src="{{asset('storage/img/playera_portada.jpg')}}" style="width: 100%;">
+            <h1 style="position: absolute;color: rgba(14,45,86,0.85);font-family: 'Abril Fatface', serif;font-size: 50px; text-align: center;">EDITAR: {{ $publicacion->nombre }}</h1>
         </div>
+    </div>
+    <div style="margin-left: 0px;">
         <div class="d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-lg-center">
             <div class="card d-lg-flex justify-content-lg-center" style="width: 80%;background: rgb(255,255,253);">
                 <div class="card-body">
@@ -33,10 +34,9 @@
                                 <label class="form-label" for="categoria" style="font-size: 24px;">Categoria</label>
                                 <select class="form-select" name="categoria">
                                     <optgroup label="Categoria">
-                                        <option value="comida" {{ $publicacion->categoria == "comida" ? "selected" : "" }}>Comida</option>
-                                        <option value="ropa" {{ $publicacion->categoria == "ropa" ? "selected" : "" }}>Ropa</option>
-                                        <option value="electronicos" {{ $publicacion->categoria == "electronicos" ? "selected" : "" }}>Electronicos</option>
-                                        <option value="otro" {{ $publicacion->categoria == "otro" ? "selected" : "" }}>Otro</option>
+                                        @foreach($categorias as $categoria)
+                                            <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
+                                        @endforeach           
                                     </optgroup>
                                 </select>
                             </div>

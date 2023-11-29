@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             PublicacionSeeder::class,
-            ComentarioSeeder::class
+            ComentarioSeeder::class,
+            TemporadaSeeder::class
         ]);
     }
 }
